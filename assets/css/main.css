@@ -1,0 +1,13 @@
+.errormsg {
+    margin: 10px 0px;
+    padding: 10px 25px 10px 15px;
+    color: red;
+    font-size: 12px;
+}
+
+.successmsg {
+    margin: 10px 0px;
+    padding: 10px 25px 10px 15px;
+    color: green;
+    font-size: 12px;
+}
