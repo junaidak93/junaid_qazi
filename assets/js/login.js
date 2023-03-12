@@ -2,38 +2,34 @@
     function login() { }
 
     login.Authenticate = function () {
-        debugger
         utility.resetErrorDivs();
         var isError = true;
         var email = $("#email").val();
         var pass = $("#pass").val();
-        
+
         if (!email || !pass) {
             isError = false;
-            /*$('#login_password_error').show();*/
+            $('#login_password_error').show();
         }
 
         else if (!utility.validateEmail(email)) {
+            $('#email_error').show();
             isError = false;
         }
 
         else if (email && pass) {
-            var requestStatus = request.doAjaxRequest('GET', '', {}, JSON.stringify({ 'key': '1' }), 'json', false);
-            if (requestStatus) {
-                $('input[name="customControlAutosizing"]:checked').each(function () {
-                    utility.setCookie('email', email, 7);
-                    utility.setCookie('pass', pass, 7);
-                });
-
-                //Send one time password
-                requestStatus = request.doAjaxRequest('GET', '', {}, JSON.stringify({ 'key': '1' }), 'json', false);
-                if (requestStatus) {
-                    window.location.href = utility.hostUrl + "one-time-password/";
+            request.doAjaxRequest("POST", utility.SuperAdminLoginUrl, JSON.stringify({ "username": email, "email": email, "password": pass }), function (d) {
+                debugger
+                if (d.status) {
+                    $('input[name="customControlAutosizing"]:checked').each(function () {
+                        utility.setCookie('email', email, 7);
+                        utility.setCookie('pass', pass, 7);
+                    });
+                    window.location.href = utility.hostUrl + "profile/";
+                } else {
+                    $('#login_error').show();
                 }
-               
-            } else {
-
-            }
+            });
         }
         return isError;
     }

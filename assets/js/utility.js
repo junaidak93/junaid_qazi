@@ -2,6 +2,8 @@
     function utility() { }
 
     utility.hostUrl = "http://localhost:8089/panopte/";
+    utility.SuperAdminLoginUrl = "http://panoptesan.thesuitchstaging.com:4000/superadmin/login";
+    utility.SuperAdminRegisterUrl = "http://panoptesan.thesuitchstaging.com:4000/superadmin/register";
 
     utility.setCookie = function (name, value, days) {
         var expires = "";

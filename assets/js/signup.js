@@ -2,7 +2,7 @@
     function signup() { }
 
     signup.createUser = function () {
-        debugger
+
         utility.resetErrorDivs();
         var isError = true;
         var name = $("#name").val();
@@ -11,37 +11,36 @@
         var pass2 = $("#pass2").val();
         
         if (!email || !pass) {
-            /*$('#login_password_error').show();*/
+            $('#login_password_error').show();
             isError = false;
         }
 
         else if (!utility.validateEmail(email)) {
+            $('#email_error').show();
             isError = false;
         }
 
         else if (pass != pass2) {
+            $('#password_error').show();
             isError = false;
         }
 
         else if (email && pass) {
-            debugger
+            
             var isAggrementCheck = false;
             $('input[name="customControlAutosizing"]:checked').each(function () {
                 isAggrementCheck = true;
             });
 
             if (isAggrementCheck) {
-                var requestStatus = request.doAjaxRequest('GET', '', {}, JSON.stringify({ 'key': '1' }), 'json', false);
-                if (requestStatus) {
-                    //Send one time password
-                    requestStatus = request.doAjaxRequest('GET', '', {}, JSON.stringify({ 'key': '1' }), 'json', false);
-                    if (requestStatus) {
-                        window.location.href = utility.hostUrl + "one-time-password/";
+                request.doAjaxRequest("POST", utility.SuperAdminRegisterUrl, JSON.stringify({ "username": name,"contact_number": "+923323564667", "email": email, "password": pass, "city_id": 1, "is_active": true }), function (d) {
+                    
+                    if (d.status) {
+                        window.location.href = utility.hostUrl + "login/";
+                    } else {
+                        $('#password_error').show();
                     }
-
-                } else {
-
-                }
+                });
             }
             else {
                 alert('Please check to agree term and services');
