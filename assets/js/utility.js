@@ -1,7 +1,7 @@
 ﻿var utility = (function () {
     function utility() { }
 
-    utility.hostUrl = window.location.href.indexOf("localhost:8089") > 1 ? "http://localhost:8089/panopte/" : "https://panoptesan.thesuitchstaging.com/";
+    utility.hostUrl = window.location.href.indexOf("localhost:8089") > 1 ? "http://localhost:8089/panopte/" : "http://panoptesan.thesuitchstaging.com/";
     utility.SuperAdminLoginUrl = "http://panoptesan.thesuitchstaging.com:4000/superadmin/login";
     utility.SuperAdminRegisterUrl = "http://panoptesan.thesuitchstaging.com:4000/superadmin/register";
 
