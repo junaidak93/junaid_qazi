@@ -25,7 +25,7 @@
         $path = 'https://localhost/retroaction/' . $folder_name;
     } else {
         $folder_name = "";
-        $path = 'https://' . $_SERVER['HTTP_HOST'] . '' . $folder_name . '/';
+        $path = 'http://' . $_SERVER['HTTP_HOST'] . '' . $folder_name . '/';
     }
 
     ?>

@@ -111,3 +111,4 @@
 
 <script src="<?php echo $basesurl; ?>js/mlib.js"></script>
 <script src="<?php echo $basesurl; ?>js/functions.js"></script>
+<script src="<?php echo $basesurl; ?>js/utility.js"></script>

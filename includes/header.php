@@ -1,11 +1,24 @@
 <?php
 
-if ($_SERVER['HTTP_HOST'] == "localhost") {
+session_start();
+
+if ($_SERVER['HTTP_HOST'] == "localhost:8089") {
   $folder_name = "";
   $path = "http://localhost:8089/panopte/" . $folder_name;
+
+    if(empty($_COOKIE['logged_in']))
+    {
+        header('Location: /panopte/login');
+    }
+
 } else {
   $folder_name = "";
-  $path = 'https://' . $_SERVER['HTTP_HOST'] . '' . $folder_name . '/';
+  $path = 'http://' . $_SERVER['HTTP_HOST'] . '' . $folder_name . '/';
+
+    if(empty($_COOKIE['logged_in']))
+    {
+        header('Location: /login');
+    }
 }
 
 ?>

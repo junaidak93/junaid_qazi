@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <?php
+    session_start();
+    session_destroy();
     $srcurl = "../includes/";
     $basesurl = "../assets/";
     $path = "http://localhost:8089/panopte/";
@@ -21,7 +23,7 @@
     <?php
         if ($_SERVER['HTTP_HOST'] != "localhost:8089") {
             $folder_name = "";
-            $path = 'https://' . $_SERVER['HTTP_HOST'] . '' . $folder_name . '/';
+            $path = 'http://' . $_SERVER['HTTP_HOST'] . '' . $folder_name . '/';
         }
     ?>
 </head>

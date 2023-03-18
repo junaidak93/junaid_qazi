@@ -19,13 +19,15 @@
 
         else if (email && pass) {
             request.doAjaxRequest("POST", utility.SuperAdminLoginUrl, JSON.stringify({ "username": email, "email": email, "password": pass }), function (d) {
-                debugger
                 if (d.status) {
+                    utility.setCookie('email', email, 7);
+                    utility.setCookie('pass', pass, 7);
+                    utility.setCookie('logged_in', true, 7);
+                    
                     $('input[name="customControlAutosizing"]:checked').each(function () {
-                        utility.setCookie('email', email, 7);
-                        utility.setCookie('pass', pass, 7);
+                        utility.setCookie('rememberme', 1, 7);
                     });
-                    window.location.href = utility.hostUrl + "profile/";
+                    utility.redirect("profile");
                 } else {
                     $('#login_error').show();
                 }
@@ -39,9 +41,10 @@
 
 /********Login Functions Calling********/
 
-$("#email").val(utility.getCookie("email"));
-$("#pass").val(utility.getCookie("pass"));
-
+if (utility.getCookie("rememberme") == 1) {
+    $("#email").val(utility.getCookie("email"));
+    $("#pass").val(utility.getCookie("pass"));
+}
 
 $("#customControlAutosizing").change(function () {
     if (!this.checked) {

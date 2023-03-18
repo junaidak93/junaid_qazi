@@ -1,7 +1,7 @@
 ﻿var utility = (function () {
     function utility() { }
 
-    utility.hostUrl = "http://localhost:8089/panopte/";
+    utility.hostUrl = window.location.href.indexOf("localhost:8089") > 1 ? "http://localhost:8089/panopte/" : "https://panoptesan.thesuitchstaging.com/";
     utility.SuperAdminLoginUrl = "http://panoptesan.thesuitchstaging.com:4000/superadmin/login";
     utility.SuperAdminRegisterUrl = "http://panoptesan.thesuitchstaging.com:4000/superadmin/register";
 
@@ -26,8 +26,10 @@
         return null;
     }
 
-    utility.eraseCookie = function (name) {
-        document.cookie = name + '=; Max-Age=-99999999;';
+    utility.eraseCookie = function (cookieArr) {
+        for (var i = 0; i < cookieArr.length; i++) {
+            document.cookie = cookieArr[i] + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        }
     }
 
     utility.validateEmail = (email) => {
@@ -46,6 +48,10 @@
         $('#wrong_code_error').hide();
         $('#email_notification').hide();
     }
+
+    utility.redirect = function (viewName) {
+        window.location.href = utility.hostUrl + viewName +"/";
+    };
 
     return utility;
 })();
